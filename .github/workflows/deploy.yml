@@ -27,3 +27,6 @@ jobs:
       
       - name: Grant Execute permission ro script
         run: chmod 766 terraform.sh
+
+      - name: Deploy terraform script
+        run: terraform.sh
