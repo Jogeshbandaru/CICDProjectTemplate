@@ -1,9 +1,11 @@
-provider "aws" {
-    region = "us-east-1"
-}
-
-resource "aws_instance" "demo_server" {
-    ami = "ami-05b10e08d247fb927"
+resource "aws_instance" "Nam-server" {
+    ami = "ami-04b4f1a9cf54c11d0"
     instance_type = "t2.micro"
-    key_name = "jogesh-kp1"
+    key_name = "jogesh-kp"
+    vpc_security_group_ids = [aws_security_group.Nam-sg.id]
+    subnet_id = aws_subnet.Nam-public-subnet-01.id
+    for_each = toset(["jenkins-master", "jenkins-slave", "ansible"])
+    tags = {
+        Name = "${each.key}"
+    }
 }
